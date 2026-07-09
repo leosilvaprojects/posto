@@ -1,61 +1,221 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Coisas do Cdi 2</title>
-        <style>
-            body{
-            font-family:"lucida sans";
-                font-size: 20px;
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coisas do Cdi 2</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <style>
+        /* Paleta de Cores e Variáveis */
+        :root {
+            --primary-color: #d32f2f; /* Um vermelho Material mais moderno */
+            --bg-color: #f5f5f6;
+            --surface-color: #ffffff;
+            --text-primary: rgba(0, 0, 0, 0.87);
+            --text-secondary: rgba(0, 0, 0, 0.60);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* App Bar (Cabeçalho) */
+        .app-bar {
+            background-color: var(--primary-color);
+            color: white;
+            width: 100%;
+            padding: 16px 24px;
+            box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.2);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .app-bar h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* Container Principal */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 24px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Barra de Pesquisa (Estilo Card) */
+        .pesquisa {
+            background-color: var(--surface-color);
+            padding: 8px 24px;
+            border-radius: 28px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            margin: 24px 0 40px 0;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            align-items: center;
+            transition: box-shadow 0.3s cubic-bezier(.25,.8,.25,1);
+        }
+
+        .pesquisa:focus-within {
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        }
+
+        .pesquisa form {
+            display: flex;
+            width: 100%;
+            align-items: center;
+        }
+
+        .pesquisa input {
+            flex-grow: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            padding: 12px;
+            background: transparent;
+        }
+
+        .pesquisa button {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+
+        .pesquisa button:hover {
+            background-color: rgba(211, 47, 47, 0.08);
+        }
+
+        /* Grid de Cards (Links) */
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+            width: 100%;
+        }
+
+        .content a {
+            background-color: var(--surface-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 24px 16px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            /* Sombra Padrão Material */
+            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s, color 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+        }
+
+        .content a i {
+            font-size: 36px;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+            transition: color 0.2s;
+        }
+
+        /* Efeito Hover nos Cards */
+        .content a:hover {
+            transform: translateY(-4px); /* Levanta o card */
+            box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2);
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .content a:hover i {
+            color: white;
+        }
+
+        /* Responsividade para Celulares */
+        @media (max-width: 600px) {
+            .content {
+                grid-template-columns: 1fr; /* Fica em 1 coluna no celular */
             }
-            .cabecalho {
-                text-align: center
-            }
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="app-bar">
+        <h1>O CDI 2</h1>
+    </header>
+
+    <main class="container">
         
-            .content{
-                display: grid;
-                grid-template-columns: auto auto auto;
-                justify-self:center;
-                font-size: 40px;
-                gap: 20px;
-                
-            }
-            
-            .content a{
-                background-color: red;
-                color: white;
-                text-decoration: none;
-                padding:10px;
-                border-radius: 40px;
-                text-align:left;
-                
-                
-                
-            }
+        <div class="pesquisa">
+            <form action="https://www.google.com/search" method="get" target="_blank">
+                <span class="material-icons" style="color: var(--text-secondary); margin-right: 8px;">search</span>
+                <input type="text" name="q" placeholder="Pesquisar no Google..." required>
+                <button type="submit" title="Buscar">
+                    <span class="material-icons">arrow_forward</span>
+                </button>
+            </form>
+        </div>
+
+        <div class="content">
+            <a href="https://saude-gmus.setelagoas.mg.gov.br/home">
+                <i class="material-icons">local_hospital</i>
+                GMUS
+            </a>
+            <a href="https://cadastro.saude.gov.br/novocartao/restrito/usuarioConsulta.jsp">
+                <i class="material-icons">badge</i>
+                Cartão SUS
+            </a>
+            <a href="https://agenda.setelagoas.mg.gov.br/index.html">
+                <i class="material-icons">event_note</i>
+                Regulador
+            </a>
+            <a href="Arquivos/Gerador%20Encaminhamento.html">
+                <i class="material-icons">send</i>
+                Encaminhamento
+            </a>
+            <a href="Arquivos/Capa%20de%20Pronntuario.html">
+                <i class="material-icons">folder_shared</i>
+                Capa de Prontuário
+            </a>
+            <a href="https://drive.google.com/drive/folders/13hhVECNgQnF3P6jBNNRQsLaYz6vKpGHY?usp=sharing">
+                <i class="material-icons">cloud_circle</i>
+                Atenas
+            </a>
+            <a href="https://drive.google.com/drive/folders/1-A2qrW7AIFkBQQsI0XKB9FkKOB4Rw8Y4?usp=sharing">
+                <i class="material-icons">print</i>
+                Impressos
+            </a>
+            <a href="https://docs.google.com/spreadsheets/d/1627GTQGCTu96TJhS93V2tLjXKqd3T-xOIrxEXeFOsmQ/edit?gid=80329976#gid=80329976">
+                <i class="material-icons">medication</i>
+                Status Medicamentos
+            </a>
+        </div>
         
-        </style>
-    </head>
-    <body>
-        <div class=cabecalho>
-            <h1>O CDI 2</h1>
-        </div>
-        <div class=content>
-        <a href="https://saude-gmus.setelagoas.mg.gov.br/home">GMUS</a>
-        <a href="https://cadastro.saude.gov.br/novocartao/restrito/usuarioConsulta.jsp">Cartão SUS</a>
-        <a href="https://agenda.setelagoas.mg.gov.br/index.html">Regulador🏠</a>
-        <a href="Gerador%20Encaminhamento.html">Encaminhamento</a>
-        <a href="Capa%20de%20Pronntuario.html">Capa de Prontuario</a>
-        <a href="https://drive.google.com/drive/folders/13hhVECNgQnF3P6jBNNRQsLaYz6vKpGHY?usp=sharing">Atenas</a>
-        <a href="https://drive.google.com/drive/folders/1-A2qrW7AIFkBQQsI0XKB9FkKOB4Rw8Y4?usp=sharing">Impressos</a>
-        <a href="https://docs.google.com/spreadsheets/d/1627GTQGCTu96TJhS93V2tLjXKqd3T-xOIrxEXeFOsmQ/edit?gid=80329976#gid=80329976">Status <br> Medicamentos</a>
-        </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    </body>
+    </main>
+</body>
 </html>
